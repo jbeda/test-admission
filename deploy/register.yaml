@@ -1,0 +1,22 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: test-admission
+webhooks:
+- name: my-webhook.example.com
+  rules:
+  - operations: ["CREATE", "UPDATE", "DELETE"]
+    apiGroups: [""]
+    apiVersions: ["v1"]
+    resources: ["configmaps"]
+    scope: "Namespaced"
+  sideEffects: None
+  timeoutSeconds: 1
+  failurePolicy: Fail
+  admissionReviewVersions: ["v1", "v1beta1"]
+  clientConfig:
+    service:
+      namespace: "default"
+      name: "test-admission"
+      path: "/configmaps"
+    caBundle: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUMyakNDQWNJQ0NRQ3pXM0lLbVg0eEZEQU5CZ2txaGtpRzl3MEJBUXNGQURBdk1TMHdLd1lEVlFRRERDUkIKWkcxcGMzTnBiMjRnUTI5dWRISnZiR3hsY2lCWFpXSm9iMjlySUVSbGJXOGdRMEV3SGhjTk1qQXdOREF6TWpFeApNalUwV2hjTk1qQXdOVEF6TWpFeE1qVTBXakF2TVMwd0t3WURWUVFERENSQlpHMXBjM05wYjI0Z1EyOXVkSEp2CmJHeGxjaUJYWldKb2IyOXJJRVJsYlc4Z1EwRXdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUsKQW9JQkFRQzdXYjZxZXVmditRRERuWU5CU1dMNEtCeiszeEtUVnp0bVJWSnlQeHRkbHpBZFdvYXVvT0o5N3RuVgpSZWgyakplQmU3WTJycEo5ZjBwVkFaSVc0MFdCaEFiSDZxTFV2Tm9oTkdDMnRxU3ZwR1JKaWc0TkhlRzNaYng4CktSTjJMNFY2OUlLSE1mbnF4ZW5rRncvSlE1Q2JwSEhmVFhGc24yMkFjdjhOaXRCQmI4bkRmZnBzQVRJSlFudUoKVWFzV3R0VU5nbXR4OUcwZXBManFwNjhycDFkQW5PVUdKWkJveExsVnJWLzVqbnZWSWFXZEdLWjN5OXh2Tms4VAp3VGNJY2RYRzEydlY3ZUhHdnZpRDhWbDJQYWlnUGVJbkxUQzNGMjBINDNaQldJdnVsUHBQSmplUEFOMGlkVTQ1CmtjOHd2Q1RXZXA3cXpTYnlCdVhZdE1vQmlUWHJBZ01CQUFFd0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIS2kKOHZFMHR2MVNGUFNQU1QzNEFsU3BmOWEyZDNCc1dRejkvS0ZsbFJNcERQaW9EbHFRQWJvK2IxcXQ3WGdoeUZVRApFYS9KK3lOTytveTJDQ1lkOGFTaDAySXZTYWV2SzAzeDIzd3pUOG9KU0djRHAyd2lyQWVyWTBnZ29SeWp3YUVpCnhRZTFaVlhQa3d4MEplV1E0RUx0blZmY0dvOWNjRkNyekkvUXhvdGRVTkVLWVBQSlhkT3NTMmFkUU1BSGdub2UKcngwaC9scEtwL2VNNFBRQWJreDJkN2dJSmNRTE5RMXBpNDg4UUNVT0tlbW83STQweVIvaGpyS1VxcFhPK2Mxago1ajUzbzZqOC9LbEtuYTJ6QklvWFViZjVKWk5pNytSUjBYVTNETysrNk8rbTNwV3BhMkZjTjhuRXBNdS8vNC9PCjFIRVFJVzJhUnZGeGpjL0Noa0U9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K

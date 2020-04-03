@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-admission
+  labels:
+    app: test-admission
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-admission
+  template:
+    metadata:
+      labels:
+        app: test-admission
+    spec:
+      containers:
+      - name: test-admission
+        image: test-admission:v2
+        command: ["test-admission"]
+        args:
+          - "--tls-cert-file=/tls/tls.crt"
+          - "--tls-private-key-file=/tls/tls.key"
+        ports:
+        - containerPort: 443
+        volumeMounts:
+          - name: tls
+            readOnly: true
+            mountPath: "/tls"
+      volumes:
+        - name: tls
+          secret:
+            secretName: tls
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-admission
+spec:
+  selector:
+    app: test-admission
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 443

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-configmap
+data:
+  foo: bar
+  webhook-e2e-test: webhook-nondeletable
